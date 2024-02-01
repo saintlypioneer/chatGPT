@@ -28,7 +28,7 @@ export default function ModelSelection(props) {
     ];
 
     return (
-        <Popover width={300} position="bottom-start" trapFocus shadow="md">
+        <Popover width={300} position="bottom" trapFocus shadow="md">
             <Popover.Target>
                 {props.children}
             </Popover.Target>
@@ -37,7 +37,7 @@ export default function ModelSelection(props) {
                     {
                         models.map((model, idx) => {
                             return (
-                                <button className="flex gap-2 items-center text-sm py-3 px-4 hover:bg-black/5 rounded">
+                                <button key={idx} className="flex gap-2 items-center text-sm py-3 px-4 hover:bg-black/5 rounded">
                                     {model.icon}
                                     <div className="flex-1 flex flex-col text-left">
                                         <span className="text-light-text-primary">{model.title}</span>
