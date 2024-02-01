@@ -1,15 +1,28 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+// URL of your Node.js server
+const SERVER_URL = `${import.meta.env.VITE_SERVER_URL}/llm`;
+// const SERVER_URL = https://chatgpt-server-pmlcffocea-uc.a.run.app/llm
 
 // Async thunk for sending a message and receiving a response
 export const sendMessage = createAsyncThunk(
   'messages/sendMessage',
   async (messageText, { rejectWithValue }) => {
     try {
-      // Simulate sending a payload to a URL and waiting for a response
-      const fakeApiResponse = await new Promise((resolve) => 
-        setTimeout(() => resolve(`Response to: ${messageText}`), 500)
-      );
-      return fakeApiResponse;
+      const payload = {
+        messages: [
+          {
+            role: "user",
+            content: messageText
+          }
+        ]
+      };
+
+      const response = await axios.post(SERVER_URL, payload);
+
+      // Assuming the response structure is as specified
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -44,7 +57,7 @@ export const MessagesSlice = createSlice({
         });
         // Add the bot's response
         state.data.push({
-          text: action.payload, // Response from the fake API
+          text: action.payload, // Response from the server
           from: 'ChatGPT',
           time: new Date().toISOString()
         });
@@ -57,6 +70,6 @@ export const MessagesSlice = createSlice({
   }
 });
 
-export const {startNewChat} = MessagesSlice.actions;
+export const { startNewChat } = MessagesSlice.actions;
 
 export default MessagesSlice.reducer;
