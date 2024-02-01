@@ -3,3 +3,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.typing-effect {
+    white-space: nowrap; /* Keep text in a single line */
+    overflow: hidden; /* Hide text that overflows the container */
+    border-right: 2px solid transparent; /* Initially transparent cursor */
+  }
+  
+  .cursor {
+    animation: blink 0.5s step-end infinite;
+  }
+  
+  @keyframes blink {
+    50% {
+      border-color: black; /* Change to the color of your text */
+    }
+  }
+  

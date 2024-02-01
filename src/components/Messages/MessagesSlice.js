@@ -7,7 +7,7 @@ export const sendMessage = createAsyncThunk(
     try {
       // Simulate sending a payload to a URL and waiting for a response
       const fakeApiResponse = await new Promise((resolve) => 
-        setTimeout(() => resolve(`Response to: ${messageText}`), 1000)
+        setTimeout(() => resolve(`Response to: ${messageText}`), 500)
       );
       return fakeApiResponse;
     } catch (error) {

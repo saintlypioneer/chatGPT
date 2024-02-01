@@ -37,7 +37,7 @@ export default function NewMessage() {
     }
 
     return (
-        <div className='p-3'>
+        <div className='p-3 bg-white'>
            <div className='mx-auto max-w-[900px]'>
              {/* input component */}
              <div className={`border border-light-text-secondary rounded-xl px-3 py-1 flex items-end ${text=="" && "items-center"}`}>
