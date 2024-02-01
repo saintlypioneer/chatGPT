@@ -6,6 +6,8 @@ import Messages from './components/Messages/Messages'
 import { useDispatch, useSelector } from 'react-redux'
 import '@mantine/core/styles.css';
 
+import 'highlight.js/styles/default.css'; // Choose your style
+
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import { MantineProvider } from '@mantine/core';
