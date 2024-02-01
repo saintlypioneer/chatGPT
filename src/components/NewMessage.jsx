@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { FaArrowUp } from "react-icons/fa";
 import { sendMessage } from './Messages/MessagesSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Tooltip } from '@mantine/core';
+import { PiSpinner } from "react-icons/pi";
 
 export default function NewMessage() {
 
@@ -28,6 +29,7 @@ export default function NewMessage() {
 
     // handle sending new messages
     const dispatch = useDispatch();
+    const {loading} = useSelector(state => state.messages);
     function submitNewMessage(){
         console.log("Button clicked: ", text);
         dispatch(sendMessage(text));
@@ -50,8 +52,10 @@ export default function NewMessage() {
                     placeholder='Message ChatGPT…'
                 />
                 <Tooltip label="Send message" offset={10} withArrow arrowOffset={20} arrowSize={7} arrowPosition='center' >
-                <button onClick={submitNewMessage} disabled={text==""} className={`w-8 h-8 bg-light-text-primary ${text=="" && "bg-light-text-secondary"} flex justify-center items-center border-none rounded-md my-1`}>
-                    <FaArrowUp color='white' />
+                <button onClick={submitNewMessage} disabled={text=="" || loading} className={`w-8 h-8 bg-light-text-primary ${text=="" && "bg-light-text-secondary"} flex justify-center items-center border-none rounded-md my-1`}>
+                    {
+                        loading ? (<PiSpinner color='black' className='animate-spin' />) : (<FaArrowUp color='white' />)
+                    }
                 </button>
                 </Tooltip>
             </div>
