@@ -23,7 +23,7 @@ function App() {
 
   return (
     <MantineProvider>
-      <div className='font-soehne text-base leading-7 text-light-text-primary flex'>
+      <div className='font-soehne text-base leading-7 text-light-text-primary w-screen flex'>
         <Sidebar />
 
         {/* sidebar handling button [only on medium and bigger screens] */}
@@ -37,7 +37,7 @@ function App() {
         </div>
 
 
-        <div className='h-screen w-screen flex flex-col'>
+        <div className='flex-1 w-full overflow-x-scroll h-screen flex flex-col'>
           <TopNavigation />
 
           {/* only show when no messages are present in this chat */}

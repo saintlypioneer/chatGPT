@@ -1,7 +1,7 @@
 import { TbEdit } from "react-icons/tb";
 import MenuIcon from "../assets/icons/svg/menu";
 import { FaChevronDown } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startNewChat } from "./Messages/MessagesSlice";
 import ModelSelection from "./ModelSelection";
 import { toggleSidebar } from "./Sidebar/SidebarSlice";
@@ -9,6 +9,7 @@ import { toggleSidebar } from "./Sidebar/SidebarSlice";
 export default function TopNavigation() {
 
     const dispatch = useDispatch();
+    const { isOpen: isSidebarOpen } = useSelector(state => state.sidebar);
 
     return (
         <div className="flex justify-between border-b md:border-none p-3 md:justify-start md:gap-4">
@@ -19,11 +20,16 @@ export default function TopNavigation() {
                 <MenuIcon size={20} />
             </button>
             {/* new chat button on medium screens and above */}
-            <button onClick={() => {
-                dispatch(startNewChat());
-            }} className="hidden md:flex w-9 h-9 flex-col justify-center items-center border border-light-text-secondary rounded-md">
-                <TbEdit size={"20px"} />
-            </button>
+            {
+                // only show when menu is hidden
+               (!isSidebarOpen) && (
+                <button onClick={() => {
+                    dispatch(startNewChat());
+                }} className="hidden md:flex w-9 h-9 flex-col justify-center items-center border border-light-text-secondary rounded-md">
+                    <TbEdit size={"20px"} />
+                </button>
+               )
+            }
 
             {/* model selection */}
             <ModelSelection>
