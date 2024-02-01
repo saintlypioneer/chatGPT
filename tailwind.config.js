@@ -13,7 +13,7 @@ export default {
         'soehne-circle': ['Söhne Circle', 'sans-serif'],
       },
       colors: {
-        'light-primary': '',
+        'light-primary': '#ab68ff',
         'light-secondary': '',
         'light-background': '',
         'light-text-primary': '#0f0f0f',

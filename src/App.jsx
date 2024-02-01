@@ -5,9 +5,12 @@ import './App.css'
 import TopNavigation from './components/TopNavigation'
 import InitialView from './components/InitialView'
 import NewMessage from './components/NewMessage'
-import Messages from './components/Messages'
+import Messages from './components/Messages/Messages'
+import { useSelector } from 'react-redux'
 
 function App() {
+
+  const {data: messages} = useSelector(state => state.messages);
 
   return (
     <div className='font-soehne text-base leading-7 text-light-text-primary'>
@@ -15,9 +18,9 @@ function App() {
         <TopNavigation />
 
         {/* only show when no messages are present in this chat */}
-        {/* <InitialView /> */}
-
-        <Messages />
+        {
+          (messages && messages.length>0) ? ( <Messages />) : (<InitialView />)
+        }
 
         <NewMessage />
       </div>

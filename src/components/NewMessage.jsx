@@ -1,13 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { FaArrowUp } from "react-icons/fa";
+import { sendMessage } from './Messages/MessagesSlice';
+import { useDispatch } from 'react-redux';
 
 export default function NewMessage() {
 
     const textAreaRef = useRef(null);
     const [text, setText] = useState('');
 
-    const handleTextChange = (event) => {
-        setText(event.target.value);
+    const handleTextChange = (value) => {
+        setText(value);
 
         // Reset height to 'auto' to get the correct scroll height
         textAreaRef.current.style.height = 'auto';
@@ -16,17 +18,20 @@ export default function NewMessage() {
         textAreaRef.current.style.height = `${Math.min(textAreaRef.current.scrollHeight, 130)}px`;
     };
 
-    const onSubmit = () => {
-        console.log("Submit:", text);
-        // Add your submit logic here
-    };
-
     const handleKeyDown = (event) => {
         if (event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault(); // Prevent the default action (new line)
-            onSubmit(); // Call the submit function
+            submitNewMessage();
         }
     };
+
+    // handle sending new messages
+    const dispatch = useDispatch();
+    function submitNewMessage(){
+        console.log("Button clicked: ", text);
+        dispatch(sendMessage(text));
+        handleTextChange("");
+    }
 
     return (
         <div className='p-3'>
@@ -36,13 +41,13 @@ export default function NewMessage() {
                     ref={textAreaRef}
                     className="w-full border rounded-md resize-none overflow-hidden focus:outline-none border-none"
                     rows="1"
-                    style={{ maxHeight: '130px' }}
+                    style={{ maxHeight: '130px', minHeight: '35px' }}
                     value={text}
-                    onChange={handleTextChange}
+                    onChange={e => handleTextChange(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder='Message ChatGPT…'
                 />
-                <button className={`w-8 h-8 bg-light-text-primary ${text=="" && "bg-light-text-secondary"} flex justify-center items-center border-none rounded-md my-1`}>
+                <button onClick={submitNewMessage} disabled={text==""} className={`w-8 h-8 bg-light-text-primary ${text=="" && "bg-light-text-secondary"} flex justify-center items-center border-none rounded-md my-1`}>
                     <FaArrowUp color='white' />
                 </button>
             </div>
