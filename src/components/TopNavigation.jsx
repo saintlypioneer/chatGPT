@@ -4,6 +4,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { startNewChat } from "./Messages/MessagesSlice";
 import ModelSelection from "./ModelSelection";
+import { toggleSidebar } from "./Sidebar/SidebarSlice";
 
 export default function TopNavigation() {
 
@@ -12,9 +13,11 @@ export default function TopNavigation() {
     return (
         <div className="flex justify-between border-b md:border-none p-3 md:justify-start md:gap-4">
             {/* drawer button (hidden on bigger screens) */}
-            <span className={`flex flex-col justify-center items-center md:hidden`}>
+            <button onClick={()=>{
+                dispatch(toggleSidebar());
+            }} className={`flex flex-col justify-center items-center md:hidden`}>
                 <MenuIcon size={20} />
-            </span>
+            </button>
             {/* new chat button on medium screens and above */}
             <button onClick={() => {
                 dispatch(startNewChat());

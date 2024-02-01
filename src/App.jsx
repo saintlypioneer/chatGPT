@@ -24,8 +24,8 @@ function App() {
       <div className='font-soehne text-base leading-7 text-light-text-primary flex'>
         <Sidebar />
 
-        {/* sidebar handling button */}
-        <div className='h-screen w-0 flex flex-col justify-center relative'>
+        {/* sidebar handling button [only on medium and bigger screens] */}
+        <div className='h-screen w-0 flex-col justify-center relative hidden md:flex'>
           <button className='absolute' onClick={()=>{
             dispatch(toggleSidebar());
           }}>
