@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Drawer } from "@mantine/core";
 import { toggleSidebar } from "./SidebarSlice";
 import { useEffect, useState } from "react";
+import {startNewChat} from "../Messages/MessagesSlice";
 
 import { RiOpenaiFill } from "react-icons/ri";
 import { TbEdit } from "react-icons/tb";
@@ -85,6 +86,7 @@ const GenericSidebar = () => {
         "ChatGPT on Managing Personal Finances"
     ];
     
+    const dispatch = useDispatch();
 
     return (
         <motion.div className={`overflow-x-hidden`}
@@ -96,7 +98,7 @@ const GenericSidebar = () => {
             <div className="h-screen w-64 bg-light-text-primary text-white p-2 flex flex-col">
 
                 <div className="bg-light-text-primary">
-                    <BrandButton image={<RiOpenaiFill size={"28px"} className="bg-white text-light-text-primary p-1 rounded-full" />} text={"ChatGPT"} icon={<TbEdit size={"20px"} />} />
+                    <BrandButton image={<RiOpenaiFill size={"28px"} className="bg-white text-light-text-primary p-1 rounded-full" />} text={"ChatGPT"} icon={<TbEdit size={"20px"} />} handler={()=>{dispatch(startNewChat())}} />
                 </div>
 
                 <div className="flex-1 flex flex-col gap-2 overflow-y-scroll">
@@ -111,7 +113,7 @@ const GenericSidebar = () => {
                         {
                             history.map((obj, idx) => {
                                 return (
-                                    <button key={idx} className="p-2 w-full truncate text-sm text-start">{obj}</button>
+                                    <button key={idx} className="p-2 w-full truncate text-sm text-start hover:bg-white/15 rounded-md">{obj}</button>
                                 );
                             })
                         }
