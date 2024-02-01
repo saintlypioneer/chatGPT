@@ -8,23 +8,22 @@ const SERVER_URL = `${import.meta.env.VITE_SERVER_URL}/llm`;
 // Async thunk for sending a message and receiving a response
 export const sendMessage = createAsyncThunk(
   'messages/sendMessage',
-  async (messageText, { rejectWithValue }) => {
+  async (messageText, thunkAPI) => {
     try {
+      const state = thunkAPI.getState();
+      const messagesHistory = state.messages.data.map(msg => ({
+        role: msg.from === 'You' ? 'user' : 'system',
+        content: msg.text
+      }));
+
       const payload = {
-        messages: [
-          {
-            role: "user",
-            content: messageText
-          }
-        ]
+        messages: [...messagesHistory, { role: "user", content: messageText }]
       };
 
       const response = await axios.post(SERVER_URL, payload);
-
-      // Assuming the response structure is as specified
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
