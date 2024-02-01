@@ -24,7 +24,11 @@ export const MessagesSlice = createSlice({
     error: null
   },
   reducers: {
-    // Define any synchronous reducers if needed
+    startNewChat: (state) => {
+      state.data = [];
+      state.loading = false;
+      state.error = null;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -52,5 +56,7 @@ export const MessagesSlice = createSlice({
       });
   }
 });
+
+export const {startNewChat} = MessagesSlice.actions;
 
 export default MessagesSlice.reducer;

@@ -6,7 +6,7 @@ export default function Messages(){
     const {data: messages} = useSelector(state => state.messages);
 
     return (
-        <div className="flex-1 overflow-y-scroll p-3">
+        <div className="flex-1 overflow-y-scroll p-3 w-full max-w-[900px] md:mx-auto">
             {
                 messages?.map((message, idx) => {
                     return (

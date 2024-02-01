@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { FaArrowUp } from "react-icons/fa";
 import { sendMessage } from './Messages/MessagesSlice';
 import { useDispatch } from 'react-redux';
+import { Tooltip } from '@mantine/core';
 
 export default function NewMessage() {
 
@@ -35,8 +36,9 @@ export default function NewMessage() {
 
     return (
         <div className='p-3'>
-            {/* input component */}
-            <div className={`border border-light-text-secondary rounded-xl px-3 py-1 flex items-end ${text=="" && "items-center"}`}>
+           <div className='mx-auto max-w-[900px]'>
+             {/* input component */}
+             <div className={`border border-light-text-secondary rounded-xl px-3 py-1 flex items-end ${text=="" && "items-center"}`}>
                 <textarea
                     ref={textAreaRef}
                     className="w-full border rounded-md resize-none overflow-hidden focus:outline-none border-none"
@@ -47,9 +49,11 @@ export default function NewMessage() {
                     onKeyDown={handleKeyDown}
                     placeholder='Message ChatGPT…'
                 />
+                <Tooltip label="Send message" offset={10} withArrow arrowOffset={20} arrowSize={7} arrowPosition='center' >
                 <button onClick={submitNewMessage} disabled={text==""} className={`w-8 h-8 bg-light-text-primary ${text=="" && "bg-light-text-secondary"} flex justify-center items-center border-none rounded-md my-1`}>
                     <FaArrowUp color='white' />
                 </button>
+                </Tooltip>
             </div>
 
 
@@ -57,6 +61,7 @@ export default function NewMessage() {
             <div className='text-center leading-4 mt-3'>
                 <span className='text-xs text-light-text-token font-light'>ChatGPT can make mistakes. Consider checking important information.</span>
             </div>
+           </div>
         </div>
     );
 }
