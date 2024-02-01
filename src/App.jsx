@@ -1,23 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import TopNavigation from './components/TopNavigation'
 import InitialView from './components/InitialView'
 import NewMessage from './components/NewMessage'
 import Messages from './components/Messages/Messages'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import '@mantine/core/styles.css';
 
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
 import { MantineProvider } from '@mantine/core';
+import Sidebar from './components/Sidebar/Sidebar'
+import { closeSidebar, openSidebar, toggleSidebar } from './components/Sidebar/SidebarSlice'
 
 function App() {
 
   const { data: messages } = useSelector(state => state.messages);
 
+  const dispatch = useDispatch();
+  const {isOpen: isSidebarOpen} = useSelector(state => state.sidebar);
+
   return (
     <MantineProvider>
-      <div className='font-soehne text-base leading-7 text-light-text-primary'>
+      <div className='font-soehne text-base leading-7 text-light-text-primary flex'>
+        <Sidebar />
+
+        {/* sidebar handling button */}
+        <div className='h-screen w-0 flex flex-col justify-center relative'>
+          <button className='absolute' onClick={()=>{
+            dispatch(toggleSidebar());
+          }}>
+            {
+              (isSidebarOpen==true) ? (<FaChevronLeft />) : (<FaChevronRight />)
+            }</button>
+        </div>
+
+
         <div className='h-screen w-screen flex flex-col'>
           <TopNavigation />
 

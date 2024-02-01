@@ -31,14 +31,14 @@ export default function InitialView() {
     // for typing animation
     const [cursorVisible, setCursorVisible] = useState(true);
 
-  useEffect(() => {
-    // Set a timeout to hide the cursor after the typing animation is complete
-    const timer = setTimeout(() => {
-      setCursorVisible(false);
-    }, 1320); // Duration of your typing animation
+    useEffect(() => {
+        // Set a timeout to hide the cursor after the typing animation is complete
+        const timer = setTimeout(() => {
+            setCursorVisible(false);
+        }, 1320); // Duration of your typing animation
 
-    return () => clearTimeout(timer);
-  }, []);
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <div className="flex-1 mx-auto w-full max-w-[900px] p-3 md:p-0">
@@ -50,16 +50,16 @@ export default function InitialView() {
 
                 {/* OpenAI Welcome */}
                 <div className="m-auto">
-      <RiOpenaiFill size={"60px"} className="m-auto p-2 rounded-full border" />
-      <motion.h1 
-        className={`text-2xl font-medium mt-2 typing-effect ${cursorVisible ? 'cursor' : ''}`}
-        initial={{ width: 0 }}
-        animate={{ width: "100%" }}
-        transition={{ duration: 1.3, ease: "linear" }}
-      >
-        How can I help you today?
-      </motion.h1>
-    </div>
+                    <RiOpenaiFill size={"60px"} className="m-auto p-2 rounded-full border" />
+                    <motion.h1
+                        className={`text-2xl font-medium mt-2 typing-effect ${cursorVisible ? 'cursor' : ''}`}
+                        initial={{ width: 0 }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: 1.3, ease: "linear" }}
+                    >
+                        How can I help you today?
+                    </motion.h1>
+                </div>
 
 
                 {/* Suggestions */}

@@ -47,6 +47,7 @@ export default function ModelSelection(props) {
                                         defaultChecked={model.isSelected}
                                         color="rgba(0, 0, 0, 1)"
                                         radius="xl"
+                                        disabled
                                     />
                                 </button>
                             );
